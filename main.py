@@ -1,5 +1,6 @@
 
 import json
+import csv
 from datetime import date, datetime, timedelta
 from pathlib import Path
 
@@ -298,6 +299,35 @@ def restock_product(products):
         product["quantity"] -= quantity
 
 
+    
+def export_inventory(products):
+    if not products:
+        print("No products available to export.")
+        return
+
+    try:
+        with open(
+            "inventory_report.csv",
+            "w",
+            newline="",
+            encoding="utf-8"
+        ) as file:
+            fields = [
+                "id", "name", "category",
+                "price", "quantity", "expiry"
+            ]
+
+            writer = csv.DictWriter(file, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(products)
+
+        print("Inventory exported to inventory_report.csv")
+
+    except OSError:
+        print("Could not export the inventory report.")
+
+
+
 
 
 def inventory_summary(products):
@@ -339,7 +369,8 @@ def main():
         print("5. Inventory summary")
         print("6. Search for a product")
         print("7. Restock a product")
-        print("8. Exit")
+        print("8. Export inventory to CSV")
+        print("9. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -358,9 +389,10 @@ def main():
         elif choice == "7":
             restock_product(products)
         elif choice == "8":
+            export_inventory(products)
+        elif choice == "9":
             print("Thank you for using FreshDeal!")
-            break   
-
+            break
 
 if __name__ == "__main__":
     main()
