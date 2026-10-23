@@ -240,6 +240,34 @@ def simulate_discount(products):
     print("Actual demand and unsold stock may differ.")
 
 
+    
+def search_product(products):
+    keyword = input("Enter product name to search: ").strip().lower()
+
+    matches = [
+        item for item in products
+        if keyword in item["name"].lower()
+    ]
+
+    if not matches:
+        print("No matching products found.")
+        return
+
+    print("\n--- SEARCH RESULTS ---")
+
+    for item in matches:
+        days_left = get_days_left(item)
+
+        print(
+            f"ID: {item['id']} | "
+            f"{item['name']} | "
+            f"Price: Rs. {item['price']:.2f} | "
+            f"Quantity: {item['quantity']} | "
+            f"Days until expiry: {days_left}"
+        )
+
+
+
 def inventory_summary(products):
     """Display basic inventory statistics."""
     total_products = len(products)
@@ -277,7 +305,8 @@ def main():
         print("3. Expiry alert report")
         print("4. Simulate a discount")
         print("5. Inventory summary")
-        print("6. Exit")
+        print("6. Search for a product")
+        print("7. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -292,10 +321,10 @@ def main():
         elif choice == "5":
             inventory_summary(products)
         elif choice == "6":
+            search_product(products)
+        elif choice == "7":
             print("Thank you for using FreshDeal!")
             break
-        else:
-            print("Invalid choice. Select 1 to 6.")
 
 
 if __name__ == "__main__":
