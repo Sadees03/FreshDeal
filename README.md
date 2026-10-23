@@ -39,3 +39,4 @@ and inventory_report.csv to export inventory reports.
 This project demonstrates Python programming,
 file handling, date processing, validation,
 and version control using Git and GitHub.
+It talks about how market can grow better and low wastage of materials.
