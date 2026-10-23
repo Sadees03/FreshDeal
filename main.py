@@ -366,11 +366,11 @@ def main():
         print("2. View inventory")
         print("3. Expiry alert report")
         print("4. Simulate a discount")
-        print("5. Inventory summary")
+        print("5. Inventory summary report")
         print("6. Search for a product")
         print("7. Restock a product")
         print("8. Export inventory to CSV")
-        print("9. Exit")
+        print("9. Exit/leave")
 
         choice = input("Enter your choice: ").strip()
 
