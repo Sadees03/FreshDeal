@@ -266,6 +266,38 @@ def search_product(products):
             f"Days until expiry: {days_left}"
         )
 
+def restock_product(products):
+    try:
+        product_id = int(input("Enter product ID to restock: "))
+        quantity = int(input("Quantity to add: "))
+
+        if quantity <= 0:
+            print("Quantity must be positive.")
+            return
+
+    except ValueError:
+        print("Enter valid whole numbers.")
+        return
+
+    product = next(
+        (item for item in products if item["id"] == product_id),
+        None
+    )
+
+    if product is None:
+        print("Product not found.")
+        return
+
+    product["quantity"] += quantity
+
+    if save_products(products):
+        print(
+            f"Stock updated. New quantity: {product['quantity']}"
+        )
+    else:
+        product["quantity"] -= quantity
+
+
 
 
 def inventory_summary(products):
@@ -306,7 +338,8 @@ def main():
         print("4. Simulate a discount")
         print("5. Inventory summary")
         print("6. Search for a product")
-        print("7. Exit")
+        print("7. Restock a product")
+        print("8. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -323,8 +356,10 @@ def main():
         elif choice == "6":
             search_product(products)
         elif choice == "7":
+            restock_product(products)
+        elif choice == "8":
             print("Thank you for using FreshDeal!")
-            break
+            break   
 
 
 if __name__ == "__main__":
