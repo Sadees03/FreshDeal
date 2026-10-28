@@ -226,7 +226,7 @@ def simulate_discount(products):
     potential_revenue = discounted_price * product["quantity"]
     revenue_difference = original_revenue - potential_revenue
 
-    print("\n--- SIMULATION RESULT ---")
+    print("\n--- SIMULATION RESULTS ---")
     print("Product:", product["name"])
     print("Days until expiry:", days_left)
     print(f"Original unit price: Rs. {original_price:.2f}")
@@ -347,7 +347,7 @@ def inventory_summary(products):
         if 0 <= get_days_left(item) <= 3
     )
 
-    print("\n--- INVENTORY SUMMARY ---")
+    print("\n--- INVENTORY SUMMARY :---")
     print("Different products:", total_products)
     print("Total units in stock:", total_units)
     print(f"Total inventory value: Rs. {total_value:.2f}")
