@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshDeal | Inventory Dashboard</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div>
+            <h1>FreshDeal</h1>
+            <p>Smart Inventory & Expiry Management</p>
+        </div>
+        <span class="status">● Inventory Dashboard</span>
+    </header>
+
+    <main class="container">
+        <h2>Dashboard Overview</h2>
+        <p class="subtitle">Monitor your inventory and upcoming expiries.</p>
+        <nav class="nav-buttons">
+    <a href="/">Dashboard</a>
+    <a href="/add">Add Product</a>
+    <a href="/search">Search Product</a>
+</nav>
+
+        <section class="stats">
+            <div class="card">
+                <p>Product Types</p>
+                <h2>{{ total_products }}</h2>
+            </div>
+            <div class="card">
+                <p>Total Units</p>
+                <h2>{{ total_units }}</h2>
+            </div>
+            <div class="card">
+                <p>Inventory Value</p>
+                <h2>₹{{ "%.2f"|format(inventory_value) }}</h2>
+            </div>
+            <div class="card warning">
+                <p>Urgent Products</p>
+                <h2>{{ urgent }}</h2>
+            </div>
+            <div class="card danger">
+                <p>Expired Products</p>
+                <h2>{{ expired }}</h2>
+            </div>
+        </section>
+
+        <section class="inventory">
+            <h2>Product Inventory</h2>
+
+            {% if products %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.category }}</td>
+                            <td>₹{{ "%.2f"|format(product.price) }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.expiry }}</td>
+                            <td>
+                                {% if product.days_left < 0 %}
+                                    <span class="badge danger">Expired</span>
+                                {% elif product.days_left <= 3 %}
+                                    <span class="badge warning">Urgent</span>
+                                {% elif product.days_left <= 7 %}
+                                    <span class="badge upcoming">Upcoming</span>
+                                {% else %}
+                                    <span class="badge safe">Safe</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <p class="empty">No products found. Add products using your existing FreshDeal application.</p>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer>FreshDeal · Smart stock, less waste.</footer>
+</body>
+</html>

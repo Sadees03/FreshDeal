@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - FreshDeal</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>FreshDeal</h1>
+    <h2>Add New Product</h2>
+
+    <form method="POST">
+        <label>Product Name</label>
+        <input type="text" name="name" required>
+
+        <label>Category</label>
+        <input type="text" name="category" required>
+
+        <label>Price (₹)</label>
+        <input type="number" name="price" step="0.01" min="0" required>
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" min="0" required>
+
+        <label>Expiry Date</label>
+        <input type="date" name="expiry" required>
+
+        <button type="submit">Save Product</button>
+    </form>
+
+    <p><a href="/">Back to Dashboard</a></p>
+</body>
+</html>

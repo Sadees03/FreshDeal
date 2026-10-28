@@ -1,0 +1,161 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f5;
+    color: #24332b;
+}
+
+.header {
+    background: #174d38;
+    color: white;
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.header p {
+    margin-bottom: 0;
+    color: #d6e9dd;
+}
+
+.status {
+    font-size: 13px;
+    background: #28684c;
+    padding: 10px 14px;
+    border-radius: 20px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1250px;
+    margin: 35px auto;
+}
+
+.subtitle {
+    color: #718078;
+    margin-bottom: 25px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+    gap: 16px;
+}
+
+.card, .inventory {
+    background: white;
+    border: 1px solid #e2e9e4;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(20, 50, 30, 0.04);
+}
+
+.card p {
+    color: #718078;
+    margin: 0;
+}
+
+.card h2 {
+    font-size: 27px;
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+
+.warning {
+    border-top: 4px solid #e6a23c;
+}
+
+.danger {
+    border-top: 4px solid #d9534f;
+}
+
+.inventory {
+    margin-top: 28px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    white-space: nowrap;
+}
+
+th, td {
+    text-align: left;
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0ed;
+}
+
+th {
+    background: #f5f8f5;
+    color: #526358;
+    font-size: 13px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+}
+
+.badge.warning {
+    background: #fff1d5;
+    color: #8b5a00;
+}
+
+.badge.danger {
+    background: #fde5e4;
+    color: #a32e2a;
+}
+
+.badge.upcoming {
+    background: #e2edff;
+    color: #2857a4;
+}
+
+.badge.safe {
+    background: #dcf5e5;
+    color: #216a3c;
+}
+
+.empty {
+    color: #718078;
+    padding: 15px 0;
+}
+
+footer {
+    text-align: center;
+    color: #718078;
+    padding: 25px;
+}
+
+@media (max-width: 600px) {
+    .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 94%;
+        margin-top: 22px;
+    }
+}
