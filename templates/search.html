@@ -5,55 +5,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Products - FreshDeal</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>FreshDeal</h1>
-    <h2>Search Products</h2>
 
-    <form method="POST">
-        <label>Enter product name</label>
-        <input
-            type="text"
-            name="name"
-            placeholder="e.g. Milk"
-            required
-        >
-        <button type="submit">Search</button>
-    </form>
+<div class="app-layout">
 
-    {% if searched %}
-        <h2>Search Results</h2>
+    <aside class="sidebar">
 
-        {% if results %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Expiry Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in results %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.category }}</td>
-                        <td>₹{{ "%.2f"|format(product.price) }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.expiry }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No matching products found.</p>
-        {% endif %}
-    {% endif %}
+        <div class="brand">
+            <div class="brand-icon">F</div>
+            <div>
+                <h2>FreshDeal</h2>
+                <span>SMART INVENTORY</span>
+            </div>
+        </div>
 
-    <p><a href="/">Back to Dashboard</a></p>
+        <p class="menu-label">MAIN MENU</p>
+
+        <nav class="sidebar-nav">
+            <a href="/">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="/add">
+                <span>＋</span> Add Product
+            </a>
+
+            <a href="/search" class="active">
+                <span>⌕</span> Search Products
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-note">
+                <span>🌱</span>
+                <h3>Reduce Waste</h3>
+                <p>Manage stock smartly and keep track of expiry dates.</p>
+            </div>
+
+            <p class="sidebar-footer">FreshDeal © 2026</p>
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="welcome">INVENTORY MANAGEMENT</p>
+                <h1>Search Products</h1>
+                <p class="page-description">
+                    Find products quickly in your inventory.
+                </p>
+            </div>
+
+            <div class="topbar-right">
+                <span class="live-dot"></span>
+                <span>System Active</span>
+            </div>
+        </header>
+
+        <section class="inventory-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Find a Product</h2>
+                    <p>Search using the product name.</p>
+                </div>
+            </div>
+
+            <form method="POST" action="/search" class="product-form">
+
+                <label>Product Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. Milk, Apple, Bread"
+                    required
+                >
+
+                <button type="submit" class="primary-button">
+                    Search Product
+                </button>
+
+            </form>
+
+            {% if searched %}
+
+                <div class="section-heading" style="margin-top: 35px;">
+                    <div>
+                        <h2>Search Results</h2>
+                        <p>Products matching your search.</p>
+                    </div>
+                </div>
+
+                {% if results %}
+
+                    <div class="table-wrap">
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT ID</th>
+                                    <th>PRODUCT</th>
+                                    <th>CATEGORY</th>
+                                    <th>PRICE</th>
+                                    <th>QUANTITY</th>
+                                    <th>EXPIRY DATE</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for product in results %}
+
+                                <tr>
+                                    <td class="product-id">
+                                        #{{ product.get('id', '—') }}
+                                    </td>
+
+                                    <td class="product-name">
+                                        {{ product.name }}
+                                    </td>
+
+                                    <td>
+                                        <span class="category">
+                                            {{ product.category }}
+                                        </span>
+                                    </td>
+
+                                    <td class="price">
+                                        ₹{{ "%.2f"|format(product.price) }}
+                                    </td>
+
+                                    <td>{{ product.quantity }}</td>
+
+                                    <td>{{ product.expiry }}</td>
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+                        <div>🔍</div>
+                        <h3>No Products Found</h3>
+                        <p>Try searching with another product name.</p>
+                    </div>
+
+                {% endif %}
+
+            {% endif %}
+
+            <p style="margin-top: 25px;">
+                <a href="/">← Back to Dashboard</a>
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
 </body>
 </html>

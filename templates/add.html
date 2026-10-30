@@ -5,32 +5,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product - FreshDeal</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>FreshDeal</h1>
-    <h2>Add New Product</h2>
 
-    <form method="POST">
-        <label>Product Name</label>
-        <input type="text" name="name" required>
+<div class="app-layout">
 
-        <label>Category</label>
-        <input type="text" name="category" required>
+    <aside class="sidebar">
 
-        <label>Price (₹)</label>
-        <input type="number" name="price" step="0.01" min="0" required>
+        <div class="brand">
+            <div class="brand-icon">F</div>
+            <div>
+                <h2>FreshDeal</h2>
+                <span>SMART INVENTORY</span>
+            </div>
+        </div>
 
-        <label>Quantity</label>
-        <input type="number" name="quantity" min="0" required>
+        <p class="menu-label">MAIN MENU</p>
 
-        <label>Expiry Date</label>
-        <input type="date" name="expiry" required>
+        <nav class="sidebar-nav">
+            <a href="/">
+                <span>▦</span> Dashboard
+            </a>
 
-        <button type="submit">Save Product</button>
-    </form>
+            <a href="/add" class="active">
+                <span>＋</span> Add Product
+            </a>
 
-    <p><a href="/">Back to Dashboard</a></p>
+            <a href="/search">
+                <span>⌕</span> Search Products
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-note">
+                <span>🌱</span>
+                <h3>Reduce Waste</h3>
+                <p>Manage stock smartly and keep track of expiry dates.</p>
+            </div>
+
+            <p class="sidebar-footer">FreshDeal © 2026</p>
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="welcome">INVENTORY MANAGEMENT</p>
+                <h1>Add New Product</h1>
+                <p class="page-description">
+                    Enter product details to add an item to your inventory.
+                </p>
+            </div>
+
+            <div class="topbar-right">
+                <span class="live-dot"></span>
+                <span>System Active</span>
+            </div>
+        </header>
+
+        <section class="inventory-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Product Information</h2>
+                    <p>Fill in the details below.</p>
+                </div>
+            </div>
+
+            <form method="POST" action="/add" class="product-form">
+
+                <label>Product Name</label>
+                <input type="text" name="name"
+                       placeholder="e.g. Apple" required>
+
+                <label>Category</label>
+                <input type="text" name="category"
+                       placeholder="e.g. Fruits" required>
+
+                <label>Price (₹)</label>
+                <input type="number" name="price"
+                       step="0.01" min="0" placeholder="Enter price" required>
+
+                <label>Quantity</label>
+                <input type="number" name="quantity"
+                       min="0" placeholder="Enter quantity" required>
+
+                <label>Expiry Date</label>
+                <input type="date" name="expiry" required>
+
+                <button type="submit" class="primary-button">
+                    Save Product
+                </button>
+
+            </form>
+
+            <p style="margin-top: 20px;">
+                <a href="/">← Back to Dashboard</a>
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
 </body>
 </html>

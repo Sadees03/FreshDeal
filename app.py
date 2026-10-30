@@ -59,6 +59,7 @@ def add_product():
         ) + 1
 
         product = {
+            "id": next_id,
             "name": request.form["name"],
             "category": request.form["category"],
             "price": float(request.form["price"]),

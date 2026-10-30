@@ -550,3 +550,37 @@ tbody tr:hover {
     border: 1px solid #e5e7eb;
     background: #f3f4f6;
 }
+/* ADD PRODUCT FORM */
+
+.product-form {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.product-form label {
+    font-weight: 600;
+    color: #34443a;
+    margin-top: 8px;
+}
+
+.product-form input {
+    padding: 13px;
+    border: 1px solid #dce5df;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.product-form input:focus {
+    outline: none;
+    border-color: #27834d;
+}
+
+.product-form button {
+    margin-top: 15px;
+    cursor: pointer;
+    border: none;
+}
