@@ -167,7 +167,32 @@
                             </td>
 
                             <td class="product-name">
-                                {{ product.name }}
+                                <div class="product-info">
+
+                                    {% set name = product.name.lower() %}
+
+                                    {% if 'apple' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=100' %}
+                                    {% elif 'banana' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=100' %}
+                                    {% elif 'milk' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=100' %}
+                                    {% elif 'bread' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100' %}
+                                    {% elif 'orange' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1547514701-42782101795e?w=100' %}
+                                    {% elif 'rice' in name %}
+                                        {% set image = 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=100' %}
+                                    {% else %}
+                                        {% set image = 'https://placehold.co/100x100?text=Food' %}
+                                    {% endif %}
+
+                                    <img src="{{ image }}" alt="{{ product.name }}"
+                                        class="product-image">
+
+                                    <span>{{ product.name }}</span>
+
+                                </div>
                             </td>
 
                             <td>

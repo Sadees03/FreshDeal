@@ -534,3 +534,19 @@ tbody tr:hover {
         flex-direction: column;
     }
 }
+/* PRODUCT IMAGE STYLING */
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-image {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+}
