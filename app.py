@@ -53,6 +53,11 @@ def add_product():
     if request.method == "POST":
         products = load_products()
 
+        next_id = max(
+            (p.get("id", 0) for p in products),
+            default=0
+        ) + 1
+
         product = {
             "name": request.form["name"],
             "category": request.form["category"],

@@ -75,7 +75,7 @@ def add_product(products):
     expiry = get_expiry_date()
 
     next_id = max(
-        (product["id"] for product in products),
+        (p.get("id", 0) for p in products),
         default=0
     ) + 1
 
