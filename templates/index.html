@@ -4,97 +4,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreshDeal | Inventory Dashboard</title>
+    <title>FreshDeal | Smart Inventory</title>
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <header class="header">
-        <div>
-            <h1>FreshDeal</h1>
-            <p>Smart Inventory & Expiry Management</p>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">F</div>
+            <div>
+                <h2>FreshDeal</h2>
+                <span>SMART INVENTORY</span>
+            </div>
         </div>
-        <span class="status">● Inventory Dashboard</span>
-    </header>
 
-    <main class="container">
-        <h2>Dashboard Overview</h2>
-        <p class="subtitle">Monitor your inventory and upcoming expiries.</p>
-        <nav class="nav-buttons">
-    <a href="/">Dashboard</a>
-    <a href="/add">Add Product</a>
-    <a href="/search">Search Product</a>
-</nav>
+        <p class="menu-label">MAIN MENU</p>
 
+        <nav class="sidebar-nav">
+            <a href="/" class="active">
+                <span>▦</span> Dashboard
+            </a>
+
+            <a href="/add">
+                <span>＋</span> Add Product
+            </a>
+
+            <a href="/search">
+                <span>⌕</span> Search Products
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-note">
+                <span>🌱</span>
+                <h3>Reduce Waste</h3>
+                <p>Manage stock smartly and keep track of expiry dates.</p>
+            </div>
+
+            <p class="sidebar-footer">FreshDeal © 2026</p>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="welcome">INVENTORY MANAGEMENT</p>
+                <h1>Dashboard Overview</h1>
+                <p class="page-description">
+                    Welcome back! Here's what's happening with your inventory.
+                </p>
+            </div>
+
+            <div class="topbar-right">
+                <span class="live-dot"></span>
+                <span>System Active</span>
+            </div>
+        </header>
+
+
+        <!-- STATISTICS -->
         <section class="stats">
-            <div class="card">
-                <p>Product Types</p>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Product Types</span>
+                    <div class="stat-icon green">▦</div>
+                </div>
                 <h2>{{ total_products }}</h2>
+                <p>Different products in stock</p>
             </div>
-            <div class="card">
-                <p>Total Units</p>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Total Units</span>
+                    <div class="stat-icon blue">▤</div>
+                </div>
                 <h2>{{ total_units }}</h2>
+                <p>Total available quantity</p>
             </div>
-            <div class="card">
-                <p>Inventory Value</p>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Inventory Value</span>
+                    <div class="stat-icon purple">₹</div>
+                </div>
                 <h2>₹{{ "%.2f"|format(inventory_value) }}</h2>
+                <p>Current stock value</p>
             </div>
-            <div class="card warning">
-                <p>Urgent Products</p>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Urgent Products</span>
+                    <div class="stat-icon orange">!</div>
+                </div>
                 <h2>{{ urgent }}</h2>
+                <p>Expiring within 3 days</p>
             </div>
-            <div class="card danger">
-                <p>Expired Products</p>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <span>Expired Products</span>
+                    <div class="stat-icon red">⌛</div>
+                </div>
                 <h2>{{ expired }}</h2>
+                <p>Require attention</p>
             </div>
+
         </section>
 
-        <section class="inventory">
-            <h2>Product Inventory</h2>
+
+        <!-- INVENTORY TABLE -->
+        <section class="inventory-section">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Product Inventory</h2>
+                    <p>Review and monitor your current stock.</p>
+                </div>
+
+                <a href="/add" class="primary-button">
+                    + Add Product
+                </a>
+            </div>
+
 
             {% if products %}
+
             <div class="table-wrap">
+
                 <table>
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Expiry Date</th>
-                            <th>Status</th>
+                            <th>PRODUCT ID</th>
+                            <th>PRODUCT</th>
+                            <th>CATEGORY</th>
+                            <th>PRICE</th>
+                            <th>QUANTITY</th>
+                            <th>EXPIRY DATE</th>
+                            <th>STATUS</th>
                         </tr>
                     </thead>
+
                     <tbody>
+
                         {% for product in products %}
+
                         <tr>
-                            <td>{{ product.name }}</td>
-                            <td>{{ product.category }}</td>
-                            <td>₹{{ "%.2f"|format(product.price) }}</td>
-                            <td>{{ product.quantity }}</td>
-                            <td>{{ product.expiry }}</td>
-                            <td>
-                                {% if product.days_left < 0 %}
-                                    <span class="badge danger">Expired</span>
-                                {% elif product.days_left <= 3 %}
-                                    <span class="badge warning">Urgent</span>
-                                {% elif product.days_left <= 7 %}
-                                    <span class="badge upcoming">Upcoming</span>
-                                {% else %}
-                                    <span class="badge safe">Safe</span>
-                                {% endif %}
+
+                            <td class="product-id">
+                                #{{ product.get('id', '—') }}
                             </td>
+
+                            <td class="product-name">
+                                {{ product.name }}
+                            </td>
+
+                            <td>
+                                <span class="category">
+                                    {{ product.category }}
+                                </span>
+                            </td>
+
+                            <td class="price">
+                                ₹{{ "%.2f"|format(product.price) }}
+                            </td>
+
+                            <td>{{ product.quantity }}</td>
+
+                            <td>{{ product.expiry }}</td>
+
+                            <td>
+
+                                {% if product.days_left < 0 %}
+
+                                    <span class="badge expired">
+                                        ● Expired
+                                    </span>
+
+                                {% elif product.days_left <= 3 %}
+
+                                    <span class="badge urgent">
+                                        ● Urgent
+                                    </span>
+
+                                {% elif product.days_left <= 7 %}
+
+                                    <span class="badge upcoming">
+                                        ● Upcoming
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge safe">
+                                        ● Safe
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
                         </tr>
+
                         {% endfor %}
+
                     </tbody>
                 </table>
+
             </div>
+
             {% else %}
-                <p class="empty">No products found. Add products using your existing FreshDeal application.</p>
+
+                <div class="empty-state">
+                    <div>📦</div>
+                    <h3>Your inventory is empty</h3>
+                    <p>Add your first product to start managing your stock.</p>
+                    <a href="/add" class="primary-button">
+                        Add Your First Product
+                    </a>
+                </div>
+
             {% endif %}
+
         </section>
+
+
+        <footer class="main-footer">
+            <span>FreshDeal</span>
+            <span>Smart stock. Less waste. Better management.</span>
+        </footer>
+
     </main>
 
-    <footer>FreshDeal · Smart stock, less waste.</footer>
+</div>
+
 </body>
 </html>
